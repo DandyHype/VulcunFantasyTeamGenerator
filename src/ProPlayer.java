@@ -4,19 +4,15 @@
 public class ProPlayer {
 
     private String nickName;
-    private String team;
+    private Team team;
     private Position position;
     private int salary;
 
     //Constructors
-    public ProPlayer( String nickName) {
-        this( nickName, "N/A", Position.NA, 0);
-    }
-    public ProPlayer( String nickName, int salary) {
-        this( nickName, "N/A", Position.NA, salary);
-    }
 
-    public ProPlayer( String nickName, String team, Position position, int salary) {
+
+
+    public ProPlayer( String nickName, Team team, Position position, int salary) {
 
         setProPlayer(nickName, team, position, salary);
     }
@@ -25,15 +21,10 @@ public class ProPlayer {
 
         this(proPlayer.getNickName(), proPlayer.getTeam(), proPlayer.getPosition(), proPlayer.getSalary());
     }
-
-    public ProPlayer() {
-
-        this( "N/A", "N/A", Position.NA, 0);
-    }
     //End of Constructors
 
     //Setting up a ProPlayer
-    public void setProPlayer( String nickName, String team, Position position, int salary ) {
+    public void setProPlayer( String nickName, Team team, Position position, int salary ) {
 
         setNickName( nickName);
         setTeam( team );
@@ -45,7 +36,7 @@ public class ProPlayer {
         this.nickName = nickName;
     }
 
-    public void setTeam( String team ){
+    public void setTeam( Team team ){
         this.team = team;
     }
 
@@ -64,9 +55,10 @@ public class ProPlayer {
         return nickName;
     }
 
-    public String getTeam() {
+    public Team getTeam() {
         return team;
     }
+
 
     public Position getPosition() {
         return position;
@@ -79,6 +71,6 @@ public class ProPlayer {
     //
 
     public String toString() {
-        return String.format("\t%s\t %s\t %s\t = %d\t\n", getPosition(), getTeam(), getNickName(), getSalary());
+        return String.format("\t%s\t %s\t %s\t = %d\t\n", getPosition(), getTeam().toString(), getNickName(), getSalary());
     }
 }

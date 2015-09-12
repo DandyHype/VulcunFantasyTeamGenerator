@@ -53,32 +53,28 @@ public class FantasyTeam {
     public void addProPlayer( ProPlayer player) {
         fantasyTeam[player.getPosition().getArrayID()] = player;
         setSalaryUSed(getSalaryUsed() + player.getSalary());
-        updateTeamCounter(player.getTeam());
+        player.getTeam().addToTeamCounter();
     }
 
     public void addProPlayer( ProPlayer player, int position) {
         fantasyTeam[position] = player;
         setSalaryUSed(getSalaryUsed() + player.getSalary());
+        player.getTeam().addToTeamCounter();
 
     }
 
-    public void updateTeamCounter(String team) {
 
-        switch (team) {
-            case "TSM":
-        }
-
-
-    }
 
     public void removeProPlayer( ProPlayer player) {
         fantasyTeam[player.getPosition().getArrayID()] = null;
         setSalaryUSed(getSalaryUsed() - player.getSalary());
+        player.getTeam().subtractFromTeamCounter();
     }
 
     public void removeProPlayer( ProPlayer player, int position) {
         fantasyTeam[position] = null;
         setSalaryUSed(getSalaryUsed() - player.getSalary());
+        player.getTeam().subtractFromTeamCounter();
     }
 
     public  int counter = 0;
@@ -91,20 +87,23 @@ public class FantasyTeam {
 
         System.out.print("\n");
         counter++;
-        System.out.print(counter);
-        System.out.print("\t Salary used" + getSalaryUsed());
-        System.out.print("\t Salary left" + salaryLeft());
-        System.out.print("\n");
+        System.out.print("Team #" + counter);
+        System.out.print("\t Salary used: " + getSalaryUsed());
+        System.out.print("\t Salary left: " + salaryLeft());
+        System.out.print("\n\n\n");
 
 
     }
 
     public void buildTeam(ArrayList<ProPlayer> players, Position position) {
 
+        ArrayList <ProPlayer> remainingPlayers = new ArrayList<>();
 
         for(ProPlayer player: players) {
 
-            if((player.getPosition() == position) && (salaryLeft() >= player.getSalary())) {
+            int teamCounter = player.getTeam().getTeamCounter();
+
+            if((player.getPosition() == position) && (salaryLeft() >= player.getSalary()) && (teamCounter < 3)) {
 
                 addProPlayer(player);
 
@@ -114,9 +113,6 @@ public class FantasyTeam {
 
                 else if (position == Position.SUP) {
 
-
-
-                    ArrayList <ProPlayer> remainingPlayers = new ArrayList<>();
                     for(ProPlayer eachPlayer : players) {
                         remainingPlayers.add(eachPlayer);
                     }
@@ -151,35 +147,33 @@ public class FantasyTeam {
 
     public void addFlexPicks(ArrayList<ProPlayer> players, ProPlayer[] fantasyTeam) {
 
-
         for(ProPlayer player : players) {
 
-            if(player.equals(fantasyTeam[player.getPosition().getArrayID()])) {
-                continue;
-            }
 
-            if(salaryLeft() >= player.getSalary()) {
+            int flexPick = getLength(fantasyTeam);
+            int teamCounter = player.getTeam().getTeamCounter();
 
-                if(getLength(fantasyTeam) == 5) {
-                    addProPlayer(player, getLength(fantasyTeam));
+            if((salaryLeft() >= player.getSalary()) && (teamCounter < 3) && (fantasyTeam[player.getPosition().getArrayID()].getSalary() > player.getSalary())) {
+
+                if(flexPick == 5) {
+                    addProPlayer(player, flexPick);
                     addFlexPicks(players, fantasyTeam);
-                    removeProPlayer(player, getLength(fantasyTeam) - 1 );
+                    removeProPlayer(player, flexPick );
                 }
 
-                if(getLength(fantasyTeam) == 6) {
-                    if(player.getSalary() < fantasyTeam[getLength(fantasyTeam) - 1].getSalary()) {
-                        addProPlayer(player, getLength(fantasyTeam));
+                if( flexPick == 6 ) {
+                    if(player.getSalary() < fantasyTeam[flexPick - 1].getSalary()) {
+                        addProPlayer(player, flexPick);
                         addFlexPicks(players, fantasyTeam);
-                        removeProPlayer(player, getLength(fantasyTeam) - 1);
+                        removeProPlayer(player, flexPick);
                     }
                 }
 
-                if(getLength(fantasyTeam) == 7) {
-                    if (player.getSalary() < fantasyTeam[getLength(fantasyTeam) - 1 ].getSalary()) {
-                        addProPlayer(player, getLength(fantasyTeam));
-                        System.out.print(getLength(fantasyTeam));
+                if(flexPick == 7) {
+                    if (player.getSalary() < fantasyTeam[flexPick - 1 ].getSalary()) {
+                        addProPlayer(player, flexPick);
                         printTeam();
-                        removeProPlayer(player, getLength(fantasyTeam) - 1 );
+                        removeProPlayer(player, flexPick );
                     }
                 }
 
