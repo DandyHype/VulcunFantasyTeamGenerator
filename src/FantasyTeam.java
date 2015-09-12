@@ -125,8 +125,6 @@ public class FantasyTeam {
                         remainingPlayers.remove(usedPlayer);
 
                     addFlexPicks(remainingPlayers, fantasyTeam);
-                    //printTeam();
-                    //System.out.print(remainingPlayers);
                     remainingPlayers.clear();
 
                 }
