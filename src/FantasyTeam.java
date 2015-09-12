@@ -10,24 +10,14 @@ public class FantasyTeam {
 
 
     private ProPlayer[] fantasyTeam = new ProPlayer[ 8 ];
-    private int[] teamCounter = new int[10];
 
 
 
 
-
-    public FantasyTeam(int teamSalary, int salaryUsed/*, ProPlayer... players*/) {
+    public FantasyTeam(int teamSalary, int salaryUsed) {
 
         setTeamSalary(teamSalary);
         setSalaryUSed(salaryUsed);
-
-        /*for( ProPlayer proPlayer : players) {
-            addProPlayer(proPlayer);
-        }
-
-        */
-
-
     }
 
     public int getTeamSalary() {
