@@ -15,29 +15,29 @@ public class FantasyTeamTest {
         Team clg = new Team("Counter Logic Gaming", "CLG");
 
 
-        ProPlayer tsmDyrus = new ProPlayer("Dyrus", tsm, Position.TOP, 1390);
-        ProPlayer tsmSantorin = new ProPlayer("Santorin", tsm, Position.JUNGLE, 1220);
-        ProPlayer tsmBjergsen = new ProPlayer("Bjergsen", tsm, Position.MID, 1620);
-        ProPlayer tsmWildurtle = new ProPlayer("WildTurtle", tsm, Position.ADC, 1590);
-        ProPlayer tsmLustboy = new ProPlayer("Lustboy", tsm, Position.SUP, 1190);
+        LoLPlayer tsmDyrus = new LoLPlayer ("Dyrus", tsm, Position.TOP, 1390);
+        LoLPlayer tsmSantorin = new LoLPlayer ("Santorin", tsm, Position.JUNGLE, 1220);
+        LoLPlayer tsmBjergsen = new LoLPlayer ("Bjergsen", tsm, Position.MID, 1620);
+        LoLPlayer tsmWildurtle = new LoLPlayer ("WildTurtle", tsm, Position.ADC, 1590);
+        LoLPlayer tsmLustboy = new LoLPlayer ("Lustboy", tsm, Position.SUP, 1190);
 
-        ProPlayer cl9Balls = new ProPlayer("Balls", c9, Position.TOP, 1300);
-        ProPlayer cl9Hai = new ProPlayer("Hai", c9, Position.JUNGLE, 1270);
-        ProPlayer cl9Incarnation = new ProPlayer("Incarnati0n", c9, Position.MID, 1450);
-        ProPlayer cl9Sneaky = new ProPlayer("Sneaky", c9, Position.ADC, 1430);
-        ProPlayer cl9Lemon = new ProPlayer("LemonNation", c9, Position.SUP, 990);
+        LoLPlayer cl9Balls = new LoLPlayer ("Balls", c9, Position.TOP, 1300);
+        LoLPlayer cl9Hai = new LoLPlayer ("Hai", c9, Position.JUNGLE, 1270);
+        LoLPlayer cl9Incarnation = new LoLPlayer ("Incarnati0n", c9, Position.MID, 1450);
+        LoLPlayer cl9Sneaky = new LoLPlayer ("Sneaky", c9, Position.ADC, 1430);
+        LoLPlayer cl9Lemon = new LoLPlayer ("LemonNation", c9, Position.SUP, 990);
 
-        ProPlayer tlQuas = new ProPlayer("Quas", tl, Position.TOP, 1370);
-        ProPlayer tlIwd = new ProPlayer("IWillDominate", tl, Position.JUNGLE, 1301);
-        ProPlayer tlFenix = new ProPlayer("Fenix", tl, Position.MID, 1500);
-        ProPlayer tlPiglet = new ProPlayer("Piglet", tl, Position.ADC, 1591);
-        ProPlayer tlXspecial = new ProPlayer("XSpecial", tl, Position.SUP, 1200);
+        LoLPlayer tlQuas = new LoLPlayer("Quas", tl, Position.TOP, 1370);
+        LoLPlayer tlIwd = new LoLPlayer("IWillDominate", tl, Position.JUNGLE, 1301);
+        LoLPlayer tlFenix = new LoLPlayer("Fenix", tl, Position.MID, 1500);
+        LoLPlayer tlPiglet = new LoLPlayer("Piglet", tl, Position.ADC, 1591);
+        LoLPlayer tlXspecial = new LoLPlayer("XSpecial", tl, Position.SUP, 1200);
 
-        ProPlayer clgZion = new ProPlayer("ZionSpartan", clg, Position.TOP, 1210);
-        ProPlayer clgXmithie = new ProPlayer("Xmithie", clg, Position.JUNGLE, 1010);
-        ProPlayer clgPobelter = new ProPlayer("Pobleter", clg, Position.MID, 1400);
-        ProPlayer clgDoublelift = new ProPlayer("DoubleLift", clg, Position.ADC, 1600);
-        ProPlayer clgAphromoo = new ProPlayer("AphroMoo", clg, Position.SUP, 1201);
+        LoLPlayer clgZion = new LoLPlayer("ZionSpartan", clg, Position.TOP, 1210);
+        LoLPlayer clgXmithie = new LoLPlayer("Xmithie", clg, Position.JUNGLE, 1010);
+        LoLPlayer clgPobelter = new LoLPlayer("Pobleter", clg, Position.MID, 1400);
+        LoLPlayer clgDoublelift = new LoLPlayer("DoubleLift", clg, Position.ADC, 1600);
+        LoLPlayer clgAphromoo = new LoLPlayer("AphroMoo", clg, Position.SUP, 1201);
 
 
         proPlayers.add(tsmDyrus);
@@ -65,9 +65,11 @@ public class FantasyTeamTest {
         proPlayers.add(tlXspecial);
         proPlayers.add(clgAphromoo);
 
-        FantasyTeam team = new FantasyTeam(9800, 0);
+        //FantasyLoLTeamsGenerator generatedTeams = new FantasyLoLTeamsGenerator(9800, proPlayers);
+        //generatedTeams.printTeams();
 
-        team.buildTeam(proPlayers, Position.TOP);
+        FantasyTeamsGenerator generatedTeams = new FantasyTeamsGenerator(9700, proPlayers);
+        generatedTeams.printTeams();
     }
 }
 

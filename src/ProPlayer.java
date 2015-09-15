@@ -1,35 +1,37 @@
 /**
  * Created by ExcalibuR on 9/10/2015.
  */
-public class ProPlayer {
+public abstract class ProPlayer {
 
     private String nickName;
     private Team team;
-    private Position position;
     private int salary;
+    private int kills;
+    private int deaths;
+    private int assists;
+    private double points;
+    private static int id;
+    private int uniqueId;
 
     //Constructors
+    public ProPlayer( String nickName, Team team, int salary) {
 
-
-
-    public ProPlayer( String nickName, Team team, Position position, int salary) {
-
-        setProPlayer(nickName, team, position, salary);
+        setProPlayer(nickName, team, salary);
     }
 
     public ProPlayer( ProPlayer proPlayer) {
 
-        this(proPlayer.getNickName(), proPlayer.getTeam(), proPlayer.getPosition(), proPlayer.getSalary());
+        this(proPlayer.getNickName(), proPlayer.getTeam(), proPlayer.getSalary());
     }
     //End of Constructors
 
-    //Setting up a ProPlayer
-    public void setProPlayer( String nickName, Team team, Position position, int salary ) {
+
+    public void setProPlayer( String nickName, Team team, int salary ) {
 
         setNickName( nickName);
         setTeam( team );
-        setPosition( position );
         setSalary(salary);
+        setUniqueId();
     }
 
     public void setNickName( String nickName ) {
@@ -40,17 +42,33 @@ public class ProPlayer {
         this.team = team;
     }
 
-    public void setPosition( Position position ) {
-        this.position = position;
-    }
-
     public void setSalary( int salary) {
         this.salary = salary;
     }
-    //End of setting up a ProPlayer
 
-    //get Methods
-    //
+    public void setUniqueId() {
+        uniqueId = id;
+        this.id++;
+    }
+
+    public void setPoints(double points) {
+        this.points = points;
+    }
+
+    public void setKills(int kills) {
+        this.kills = kills;
+    }
+
+    public void setDeaths(int deaths) {
+        this.deaths = deaths;
+    }
+
+    public void setAssists(int assists) {
+        this.assists = assists;
+    }
+
+
+
     public String getNickName() {
         return nickName;
     }
@@ -59,18 +77,34 @@ public class ProPlayer {
         return team;
     }
 
-
-    public Position getPosition() {
-        return position;
-    }
-
     public int getSalary() {
         return salary;
     }
-    //End of get Methods
-    //
+
+    public int getUniqueId() {
+        return uniqueId;
+    }
+
+    public double getPoints() {
+        return points;
+    }
+
+    public int getKills() {
+        return kills;
+    }
+
+    public int getDeaths() {
+        return deaths;
+    }
+
+    public int getAssists() {
+        return assists;
+    }
+
+
+    public abstract void calculatePoints();
 
     public String toString() {
-        return String.format("\t%s\t %s\t %s\t = %d\t\n", getPosition(), getTeam().toString(), getNickName(), getSalary());
+        return String.format("\t %s\t %s\t = %d\t %d\n", getTeam().toString(), getNickName(), getSalary(), getUniqueId());
     }
 }
