@@ -20,7 +20,7 @@ public class LoLPlayer extends MobaPlayer{
 
     @Override
     public String toString() {
-        return String.format("\t%s\t %s\t %s\t = %d\t %d\n", getPosition(), getTeam().toString(), getNickName(), getSalary(), getUniqueId());
+        return String.format("\t%-6s\t %-3s\t %-15s\t = %-4d\t %-2d\n", getPosition(), getTeam().toString(), getNickName(), getSalary(), getUniqueId());
     }
 
 }
