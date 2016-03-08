@@ -52,7 +52,6 @@ public class FantasyTeam {
     public void removeProPlayer( ProPlayer player, int position) {
         fantasyTeam[position] = null;
         setSalaryUsed(getSalaryUsed() - player.getSalary());
-        player.getTeam().subtractFromTeamCounter();
     }
 
     public int getLength( ProPlayer[] array) {
