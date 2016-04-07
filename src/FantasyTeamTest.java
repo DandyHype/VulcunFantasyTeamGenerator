@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 /**
+ * VulcunFantasyTeamGenerator
  * Created by ExcalibuR on 9/10/2015.
  */
 public class FantasyTeamTest {
@@ -170,7 +171,7 @@ public class FantasyTeamTest {
         proPlayers.add(sktBang);
         proPlayers.add(sktWolf);
 
-        FantasyLoLTeamsGenerator generatedTeams = new FantasyLoLTeamsGenerator(8200, proPlayers);
+        FantasyLoLTeamsGenerator generatedTeams = new FantasyLoLTeamsGenerator(8100, proPlayers);
         generatedTeams.printTeams();
     }
 }
