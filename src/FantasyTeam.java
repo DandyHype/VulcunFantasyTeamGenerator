@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 /**
  * Created by ExcalibuR on 9/10/2015.
  */
@@ -7,13 +5,13 @@ public class FantasyTeam {
 
     private int teamSalary;
     private int salaryUsed;
+    public static int teamscounter = 0;
 
 
     private ProPlayer[] fantasyTeam = new ProPlayer[ 8 ];
 
 
-
-
+    //Start of Constructors
     public FantasyTeam(ProPlayer[] players, int teamSalary, int salaryUsed) {
 
         setTeamSalary(teamSalary);
@@ -23,22 +21,26 @@ public class FantasyTeam {
             addProPlayer(player,getLength(fantasyTeam));
         }
     }
+    //End of Constructors
 
-    public int getTeamSalary() {
-        return teamSalary;
-    }
-
-    public int getSalaryUsed() {
-        return salaryUsed;
-    }
-
+    //Start of Set methods
     public void setTeamSalary(int salary) {
         teamSalary = salary;
     }
-
     public void setSalaryUsed(int salary) {
         salaryUsed = salary;
     }
+    //End of Set methods
+
+    //Start of Get methods
+    public int getTeamSalary() {
+        return teamSalary;
+    }
+    public int getSalaryUsed() {
+        return salaryUsed;
+    }
+    //End of Get methods
+
 
     public int salaryLeft() {
         return getTeamSalary() - getSalaryUsed();
@@ -65,8 +67,6 @@ public class FantasyTeam {
         return counter;
     }
 
-    public static int counter = 0;
-
     public void printTeam() {
 
 
@@ -75,14 +75,15 @@ public class FantasyTeam {
         }
 
         System.out.print("\n");
-        counter++;
-        System.out.print("Team #" + counter);
+        teamscounter++;
+        System.out.print("Team #" + teamscounter);
         System.out.print("\t Salary Used: " + getSalaryUsed());
         System.out.print("\t Salary left: " + salaryLeft());
         System.out.print("\n\n\n");
 
 
     }
+
 
 
 

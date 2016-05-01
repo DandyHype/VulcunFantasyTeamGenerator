@@ -1,42 +1,59 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by ExcalibuR on 9/14/2015.
  */
 public class FantasyLoLTeamsGenerator extends  FantasyTeamsGenerator{
 
-    public FantasyLoLTeamsGenerator(ArrayList players) {
-        buildTeam(players, Position.TOP);
 
+    //Start of Constructors
+    public FantasyLoLTeamsGenerator() {
+        setTeamSalary(10000);
+        setSalaryUsed(0);
+        setChoice(Action.COUNT);
+    }
+    public FantasyLoLTeamsGenerator(int teamSalary) {
+        super(teamSalary);
+        setChoice(Action.COUNT);
+    }
+    public FantasyLoLTeamsGenerator(int teamSalary, Action choice) {
+        setTeamSalary(teamSalary);
+        setChoice(choice);
+    }
+    //End of Constructors
+
+
+    private  boolean isPlayerEligible(ProPlayer player, Position position) {
+        if ((((LoLPlayer)player).getPosition() == position) && (salaryLeft() >= player.getSalary()) && (player.getTeam().getTeamCounter() < 3))
+            return true;
+        else return false;
     }
 
-    public  FantasyLoLTeamsGenerator(int salary, ArrayList players) {
-        super(salary);
-        buildTeam(players, Position.TOP);
-    }
-
-    public void addProPlayer( ProPlayer player) {
+    private void addProPlayer( ProPlayer player) {
         fantasyTeam[((LoLPlayer)player).getPosition().getArrayID()] = player;
         setSalaryUsed(getSalaryUsed() + player.getSalary());
         player.getTeam().addToTeamCounter();
     }
 
-    public void removeProPlayer( ProPlayer player) {
+    private void removeProPlayer( ProPlayer player) {
         fantasyTeam[((LoLPlayer)player).getPosition().getArrayID()] = null;
         setSalaryUsed(getSalaryUsed() - player.getSalary());
         player.getTeam().subtractFromTeamCounter();
     }
 
 
-    public void buildTeam(ArrayList<ProPlayer> players, Position position) {
 
-        ArrayList <ProPlayer> remainingPlayers = new ArrayList<>();
+
+    //Build Fantasy teams
+    public void generateTeams(ArrayList<ProPlayer> players){
+        buildTeam(players, Position.TOP);
+    }
+    private void buildTeam(ArrayList<ProPlayer> players, Position position) {
 
         for(ProPlayer player: players) {
 
-            int teamCounter = player.getTeam().getTeamCounter();
-
-            if((((LoLPlayer)player).getPosition() == position) && (salaryLeft() >= player.getSalary()) && (teamCounter < 3)) {
+            if(isPlayerEligible(player, position)) {
 
                 addProPlayer(player);
 
@@ -46,14 +63,15 @@ public class FantasyLoLTeamsGenerator extends  FantasyTeamsGenerator{
 
                 else if (position == Position.SUP) {
 
-                    for(ProPlayer eachPlayer : players) {
-                        remainingPlayers.add(eachPlayer);
+                    ArrayList <ProPlayer> remainingPlayers = new ArrayList<>();
+
+                    for(ProPlayer thePlayer : players) {
+                        if(!Arrays.asList(fantasyTeam).contains(thePlayer))
+                            remainingPlayers.add(thePlayer);
                     }
 
-                    for (ProPlayer usedPlayer : fantasyTeam)
-                        remainingPlayers.remove(usedPlayer);
-
                     addFlexPicks(remainingPlayers, fantasyTeam);
+
                     remainingPlayers.clear();
 
                 }
@@ -66,8 +84,7 @@ public class FantasyLoLTeamsGenerator extends  FantasyTeamsGenerator{
 
 
     }
-
-    public void addFlexPicks(ArrayList<ProPlayer> players, ProPlayer[] fantasyTeam) {
+    private void addFlexPicks(ArrayList<ProPlayer> players, ProPlayer[] fantasyTeam) {
 
         for(ProPlayer player : players) {
 
@@ -97,7 +114,7 @@ public class FantasyLoLTeamsGenerator extends  FantasyTeamsGenerator{
                     case 7:
                         if (player.getUniqueId() < fantasyTeam[flexPick - 1].getUniqueId()) {
                             addProPlayer(player, flexPick);
-                            addTeam(fantasyTeam);
+                            actionChooser(getChoice(),fantasyTeam);
                             removeProPlayer(player, flexPick);
                         }
                         break;
@@ -105,4 +122,5 @@ public class FantasyLoLTeamsGenerator extends  FantasyTeamsGenerator{
             }
         }
     }
+    //End of build Fantasy teams
 }
